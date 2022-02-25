@@ -1,5 +1,6 @@
 import csv
 
+
 class Employee():
 
     def __init__(self, max_profit=54000):
@@ -11,7 +12,7 @@ class Employee():
 
     def get_emp_details(self):
         emp_details_list = []
-        try:    
+        try:
             with open('emp.csv') as csv_file:
                 csv_reader = csv.reader(csv_file, delimiter=',')
                 line_count = 0
@@ -24,8 +25,8 @@ class Employee():
             return emp_details_list
         except Exception as e:
             print("Error Occured {}", e)
-        return None 
-    
+        return None
+
     def get_emp_rating_details(self):
         try:
             emp_ratings = []
@@ -41,8 +42,8 @@ class Employee():
             return emp_ratings
         except Exception as e:
             print("Error Occured {}", e)
-        
-        return None 
+
+        return None
 
     def get_rating_ratio_map(self):
         rating_ration_map = {"A": 6, "B": 3, "C": 2}
@@ -76,18 +77,18 @@ class Employee():
         return emp_salary_rating, total_rating_salary_emp
 
     def get_bonus_allocation(self):
-        results = []  
+        results = []
         try:
             if self.emp_details_with_salary_ratio:
                 for each_emp in self.emp_details_with_salary_ratio:
-                    bonus_give = (each_emp.get("salary_with_rating") /
-                                self.total_rating_salary_emp) * self.max_profit
+                    bonus_give = (each_emp.get("salary_with_rating")
+                                  * self.max_profit) // self.total_rating_salary_emp
                     current_list = [each_emp.get("Id"), bonus_give]
-                    results.append(current_list)  
+                    results.append(current_list)
                 return results
             else:
                 return None
-        except Exception as e: 
+        except Exception as e:
             print("Error Occured {}", e)
 
 
